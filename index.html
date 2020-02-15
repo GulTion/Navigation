@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .items{
+        width: 100px;
+        height: 100px;
+        background: transparent;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+        margin-top: 20px;
+        margin-left: 20px;
+        transition-duration: 0.75s;
+        overflow:hidden;
+        
+        
+    }
+    .items:focus{
+        transform: translate(0px,0px) scale(0.7) rotate(270deg);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
+        
+        overflow:hidden;
+        outline: 0;
+        border-radius: 50%;
+        background: linear-gradient(45deg,rgb(121, 241, 245),rgb(157, 121, 255));
+
+    }
+
+    #elements,#ele1{
+    
+        display: flex;
+      
+    }
+    #js{
+        top: 50%;
+        left: 50%;
+        position: fixed;
+        transform: translate(-50%,-50%);
+    }
+
+</style>
+<body>
+
+    <div id="js">
+    <div id="elements">
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+    </div>
+       <div id="ele1">
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+       </div>
+       <div id="ele1">
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+       </div>
+       <div id="ele1">
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+        <div class="items"></div>
+       </div>
+       </div>
+
+   
+
+</body>
+<script>
+    const items = document.querySelectorAll('.items');
+    for(let i=0;i<items.length;i++){
+        items[i].tabIndex  =i;
+    }
+   
+const nav = (move) =>{
+ const currentIndex = document.activeElement.tabIndex;
+    let next = currentIndex + move;
+    const items = document.querySelectorAll('.items');
+    const targetElement = items[next];
+    if(next>=items.length){
+        nav(-(items.length)+1);
+        next = 0;
+    }
+    targetElement.focus();
+}
+
+document.activeElement.addEventListener('keydown', handleKeydown);
+function handleKeydown(e) {
+  switch(e.key) {
+    case 'ArrowLeft':
+      nav(-1);
+      break;
+    case 'ArrowRight':
+      nav(1);
+      break;
+      case 'ArrowDown':
+      nav(4);
+      break;
+      case 'ArrowUp':
+      nav(-4);
+      break;
+    
+  }
+}
+</script>
+</html>
